@@ -24,5 +24,5 @@ app.use("/vista-producto", vistaProductoRouter)
 app.use("/filtrar", filtroRouter);
 app.use("/editar", editarRouter)
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log("http://localhost:" + PORT));
