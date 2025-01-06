@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/icons/express-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheet/main.css">
+    <title>Productos</title>
+</head>
+<body>
+    <%- include("partials/header.ejs", { ruta: "busqueda" }) %>
+    <div class="titulo-productos-div">
+        <h1 class="titulo-productos-section"><%= titulo_pagina %></h1>
+         <%- include("partials/filtro.ejs") %>
+    </div>
+    <section class="productos-section">
+        <% if(locals.success) { %>
+            <div class="modal-creado">
+                <p style="font-size: 20px;">¡Producto actulizado!</p>
+            </div>
+        <% } %>
+        <% productos.forEach(producto => { %>
+            <div class="producto-card">
+                <div class="producto-titulo-div">
+                    <% if(producto.titulo.length > 25) { %>
+                        <h3>
+                            <a title="<%= producto.titulo %>" href="/vista-producto/<%= producto.id_producto %>"><%= producto.titulo.slice(0, 20) + "..." %></a>
+                        </h3>
+                    <% } else { %>
+                        <h3>
+                            <a title="<%= producto.titulo %>" href="/vista-producto/<%= producto.id_producto %>"><%= producto.titulo%></a>
+                        </h3>
+                    <% } %>
+                    <img class="dots" src="/icons/dots.png" alt="dots icon">
+                    <div class="close-edit">
+                        <a href="/editar/<%= producto.id_producto %>"><img src="/icons/edit.png" alt="edit icon"></a>
+                        <form action="/productos/<%=producto.id_producto %>" method="post" class="formEliminar">
+                            <button class="btnEliminar" type="submit"><img src="/icons/delete.png" alt="delete icon"></button>
+                            <input type="text" name="eliminar" value="<%= producto.id_producto %>" style="display: none">
+                            <input type="text" name="data" style="display: none;" class="data">
+                        </form>
+                    </div>
+                </div>
+                <img src="<%= producto.url_imagen %>" alt="<%= producto.titulo %>">
+                <div>
+                    <p title="<%= producto.descripcion %>"><% if(producto.descripcion.length > 100) { %>
+                        <%= producto.descripcion.slice(0, 100) + "..." %>
+
+                    <% } else { %>
+                        <%= producto.descripcion %>
+                    <% } %>
+                    </p>
+                    <div style="display: flex; flex-direction: column;">
+                    <b class="precio">$<%= producto.precio %></b>
+                    <% if(producto.id_categoria == 1) { %>
+                        <a style="color: var(--headline);" href="/categorias/1/productos">Electrónica y smartphones</a>
+                        <% } else { %>
+                            <a style="color: var(--headline);" href="/categorias/2/productos">Vestimenta</a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+        <script>
+            const dots = document.querySelectorAll(".dots")
+            const editModal = document.querySelectorAll(".close-edit");
+            const btnEliminar = document.querySelectorAll(".btnEliminar");
+            dots.forEach((dot, index) => {
+                dot.addEventListener("click", e => {
+                    editModal[index].classList.toggle("open-edit")
+                })
+            })
+            const data = document.querySelectorAll(".data");
+            const formEliminar = document.querySelectorAll(".formEliminar");
+            btnEliminar.forEach((btn, i) => {
+                btn.addEventListener("click", e => {
+                    // e.preventDefault();
+                    const eliminar = prompt("Ingresa la contraseña para eliminar el producto.");
+                    data[i].setAttribute("value", eliminar);
+                })
+            })
+        </script>
+    </section>
+    
+    <!-- <%- include("partials/footer.ejs") %> -->
+</body>
+</html>

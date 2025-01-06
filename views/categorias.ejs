@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/icons/express-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheet/main.css">
+    <title>Categorias</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    <h1 class="titulo-categorias">Categorias</h1>
+    <section class="categorias-section">
+        <% categorias.forEach(categoria => { %>
+            <div class="categorias-card">
+                <a href="/categorias/<%= categoria.id_categoria%>/productos"><h3><%= categoria.nombre %></h3></a>
+                <img src="<%= categoria.imagen_categoria %>" alt="<%= categoria.nombre %>">
+            </div>
+        <% }) %>
+    </section>
+    <!-- <%- include("partials/footer.ejs") %> -->
+</body>
+</html>

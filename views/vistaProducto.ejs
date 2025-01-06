@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/icons/express-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheet/main.css">
+    <title>Producto</title>
+</head>
+<body>
+    <%- include("partials/header.ejs") %>
+    <section class="vista-producto-section">
+        <% productos.forEach(producto => { %>
+            <div class="vista-img-div">
+                <img src="<%=producto.url_imagen %>" alt="<%=producto.titulo %>">
+            </div>
+            <div class="info-producto">
+                <h1><%= producto.titulo %></h1>
+                <div class="info-producto-div">
+                    <p><%= producto.descripcion %></p>
+                    <b class="precio">$<%= producto.precio %></b>
+                    <% if(producto.id_categoria == 1) { %>
+                        <a style="color: var(--headline);" href="/categorias/1/productos">Electrónica y smartphones</a>
+                        <% } else { %>
+                            <a style="color: var(--headline);" href="/categorias/2/productos">Vestimenta</a>
+                        <% } %>
+                </div>
+            </div>
+        <% }) %>
+    </section>
+</body>
+</html>

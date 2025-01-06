@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheet/main.css">
+    <link rel="shortcut icon" href="/icons/express-icon.png" type="image/x-icon">
+    <title>Editar</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    <h1 class="titulo-nuevo-producto">Editar producto</h1>
+    <section class="nuevo-producto-section">
+        <% if(locals.errorContraseña) { %>
+            <p style="background-color: red;"><% errorContraseña %></p>
+        <% } %>
+        <%- include("partials/errors.ejs") %>
+        <% productos.forEach(producto => { %>
+            <form action="/editar" method="post" class="formEditar">
+                <input type="text" name="id_producto" value="<%=producto.id_producto %>" style="display: none;">
+                <label for="titulo">Titulo: </label>
+                <input value="<%=producto.titulo %>" type="text" name="titulo" id="titulo" minlength="10" maxlength="40" required>
+                <label for="marca">Marca: </label>
+                <input value="<%=producto.marca %>" type="text" name="marca" id="marca">
+                <label for="precio">Precio: </label>
+                <input value="<%=producto.precio %>" type="number" name="precio" id="precio" required>
+                <label for="categoria">Categoría: </label>
+                <select name="id_categoria" id="categoria">
+                    <option value="1">Electrónica y smartphones</option>
+                    <option value="2">Vestimenta</option>
+                </select>
+                <label for="sub_categoria">Sub-categoría: </label>
+                <select name="sub_categoria" id="sub_categoria">
+                    <option value="smartphone">Smartphone</option>
+                    <option value="laptop">Laptop</option>
+                    <option value="auriculares">Auriculares</option>
+                    <option value="ropa-hombre">Vestimenta hombre</option>
+                    <option value="ropa-mujer">Vestimenta mujer</option>
+                </select>
+                <label for="url_imagen">URL imágen: </label>
+                <input value="<%= producto.url_imagen %>" type="text" name="url_imagen" id="url_imagen" placeholder="Ejemplo: https://imagenurl/3.png">
+                <label for="descripcion">Descripción: </label>
+                <textarea name="descripcion" id="descripcion" style="resize: none;"><%= producto.descripcion %></textarea>
+                <div style="width: 45%;">
+                    <button type="submit" class="btnEditar">Editar producto</button>
+                    <input type="text" name="contraseña" placeholder="Ingresa la contraseña para editar">
+                </div>
+            </form>
+        <% }) %>
+    </section>
+
+</body>
+</html>

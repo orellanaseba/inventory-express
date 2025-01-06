@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/icons/express-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheet/main.css" type="text/css">
+    <title>MarketExpress</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    <section class="banner">
+        <div class="banner-texto">
+            <h1>¡Consigue productos de segunda mano a un precio increíble!</h1>
+            <p>Vestimenta, electrónica, smartphones y más!</p>
+        </div>
+        <img src="/icons/banner-icon.png" alt="">
+    </section>
+    <section class="presentacion">
+        <div class="card">
+            <a href="categorias/2/productos"><img src="/images/shirt.png" alt=""></a>
+            <b>Vestimenta</b>
+        </div>
+        <div class="card">
+            <a href="categorias/1/productos"><img src="/images/laptop.png" alt=""></a>
+            <b>Laptops</b>
+        </div>
+        <div class="card">
+            <a href="categorias/1/productos"><img src="/images/phone.png" alt=""></a>
+            <b>Smartphones</b>
+        </div>
+    </section>
+    <!-- <%- include("partials/footer") %> -->
+</body>
+</html>

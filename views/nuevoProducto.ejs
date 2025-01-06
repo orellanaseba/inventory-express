@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/icons/express-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheet/main.css">
+    <title>Nuevo producto</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    <h1 class="titulo-nuevo-producto">Crear un nuevo producto!</h1>
+    <section class="nuevo-producto-section">
+        <%- include("partials/errors.ejs") %>
+        <% if(locals.success) { %>
+            <div class="modal-creado">
+                <p style="font-size: 20px;">¡Producto creado correctamente!</p>
+            </div>
+        <% } %>
+        <form action="/nuevo-producto" method="post">
+            <label for="titulo">Titulo: </label>
+            <input type="text" name="titulo" id="titulo" minlength="10" maxlength="40" required>
+            <label for="marca">Marca: </label>
+            <input type="text" name="marca" id="marca">
+            <label for="precio">Precio: </label>
+            <input type="number" name="precio" id="precio" required>
+            <label for="categoria">Categoría: </label>
+            <select name="id_categoria" id="categoria">
+                <option value="1">Electrónica y smartphones</option>
+                <option value="2">Vestimenta</option>
+            </select>
+            <label for="sub_categoria">Sub-categoría: </label>
+            <select name="sub_categoria" id="sub_categoria">
+                <option value="smartphone">Smartphone</option>
+                <option value="laptop">Laptop</option>
+                <option value="auriculares">Auriculares</option>
+                <option value="ropa-hombre">Vestimenta hombre</option>
+                <option value="ropa-mujer">Vestimenta mujer</option>
+            </select>
+            <label for="url_imagen">URL imágen: </label>
+            <input type="text" name="url_imagen" id="url_imagen" placeholder="Ejemplo: https://imagenurl/3.png">
+            <label for="descripcion">Descripción: </label>
+            <textarea name="descripcion" id="descripcion" style="resize: none;"></textarea>
+            <button type="submit">Crear publicación</button>
+        </form>
+    </section>
+</body>
+</html>
